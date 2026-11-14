@@ -1,32 +1,26 @@
 "use client";
 
-import { useState } from "react";
-import { site } from "@/lib/content";
+import { useActionState, useEffect, useRef } from "react";
+import { sendContact, type ContactState } from "./actions";
 
 const field =
   "w-full border-0 border-b border-ink/25 bg-transparent px-0 py-3 font-light outline-none transition-colors placeholder:text-ink/40 focus:border-henna";
 
-/**
- * Opens the visitor's email app with the message pre-filled.
- * Replace with a real endpoint (API route, Formspree, etc.) when ready.
- */
-export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+const initialState: ContactState = { status: "idle", message: "" };
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const subject = `[${data.get("topic")}] Message from ${data.get("name")}`;
-    const body = `${data.get("message")}\n\n${data.get("name")}\n${data.get("company")}\n${data.get("email")}`;
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
-  }
+export default function ContactForm() {
+  const [state, formAction, pending] = useActionState(sendContact, initialState);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (state.status === "success") formRef.current?.reset();
+  }, [state]);
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-8 sm:grid-cols-2">
-      <input name="name" required placeholder="Full name *" className={field} />
-      <input name="company" placeholder="Company" className={field} />
-      <input name="email" type="email" required placeholder="Email *" className={field} />
+    <form ref={formRef} action={formAction} className="grid gap-8 sm:grid-cols-2">
+      <input name="name" required maxLength={120} placeholder="Full name *" className={field} />
+      <input name="company" maxLength={160} placeholder="Company" className={field} />
+      <input name="email" type="email" required maxLength={200} placeholder="Email *" className={field} />
       <select name="topic" className={field} defaultValue="Fragrances">
         <option>Fragrances</option>
         <option>Flavours</option>
@@ -34,15 +28,29 @@ export default function ContactForm() {
         <option>Careers</option>
         <option>Other</option>
       </select>
-      <textarea name="message" required rows={6} placeholder="Your message *" className={`${field} sm:col-span-2`} />
+      <textarea name="message" required maxLength={5000} rows={6} placeholder="Your message *" className={`${field} sm:col-span-2`} />
+      {/* Honeypot field for bots — hidden from people and screen readers */}
+      <input
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div className="sm:col-span-2">
         <button
           type="submit"
-          className="eyebrow bg-henna-deep px-10 py-4 text-white transition-colors hover:bg-henna-night"
+          disabled={pending}
+          className="eyebrow bg-henna-deep px-10 py-4 text-white transition-colors hover:bg-henna-night disabled:cursor-wait disabled:opacity-60"
         >
-          Send message
+          {pending ? "Sending…" : "Send message"}
         </button>
-        {sent && <p className="mt-4 text-sm text-henna-deep">Your email app should open with your message ready to send.</p>}
+        <p
+          aria-live="polite"
+          className={`mt-4 text-sm ${state.status === "error" ? "text-red-700" : "text-henna-deep"}`}
+        >
+          {state.message}
+        </p>
       </div>
     </form>
   );
