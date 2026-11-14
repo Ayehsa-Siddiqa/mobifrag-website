@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "photos": "node scripts/fetch-unsplash.mjs",
+    "pixabay": "node scripts/fetch-pixabay.mjs"
   },
   "dependencies": {
     "next": "16.4.6",

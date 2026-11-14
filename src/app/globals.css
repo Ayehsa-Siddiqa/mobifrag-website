@@ -1,26 +1,114 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #141414;
+  --paper: #ffffff;
+  --cream: #f3efe8;
+  --sand: #e7e1d6;
+  --stone: #8c8a84;
+  --teal: #3bb3a6; /* former logo drop colour (now mehandi green) */
+  --teal-deep: #1f7f75;
+
+  /* Mehandi olive greens, matched to the client's bottle: main site accent */
+  --henna: #6b6b33;
+  --henna-deep: #4c4d24;
+  --henna-night: #23240f;
+  --henna-mist: #efeee2;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-stone: var(--stone);
+  --color-teal: var(--teal);
+  --color-teal-deep: var(--teal-deep);
+  --color-henna: var(--henna);
+  --color-henna-deep: var(--henna-deep);
+  --color-henna-night: var(--henna-night);
+  --color-henna-mist: var(--henna-mist);
+  --font-sans: var(--font-jost);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-jost), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Small spaced uppercase label used across the site */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Scroll-reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* Images inside a reveal block wipe open from the bottom */
+.reveal .mask-reveal {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.3s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.reveal.is-visible .mask-reveal {
+  clip-path: inset(0 0 0 0);
+}
+.reveal .mask-reveal img {
+  transform: scale(1.15);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible .mask-reveal img {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal .mask-reveal, .reveal.is-visible .mask-reveal { clip-path: none; transition: none; }
+  .reveal .mask-reveal img { transform: none; transition: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Slow drifting gradient for the hero when no video is set */
+@keyframes drift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* Progress bar under each hero scene label */
+@keyframes hero-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* Slow cinematic zoom on the hero image */
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.hero-zoom {
+  animation: slow-zoom 20s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom { animation: none; }
+}
+
+.hero-gradient {
+  background: linear-gradient(120deg, #1d2b2a, #2f5f59, #8a7a63, #1d2b2a);
+  background-size: 300% 300%;
+  animation: drift 24s ease infinite;
 }

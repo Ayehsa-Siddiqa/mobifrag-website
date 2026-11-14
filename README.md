@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mobifrag website
 
-## Getting Started
+Next.js 16 (App Router) + Tailwind CSS 4.
 
-First, run the development server:
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # http://localhost:3000
+npm run build && npm start   # production
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| All text (pages, news, centres, contact details, nav) | `src/lib/content.ts` |
+| Logos & favicon | `public/brand/`, `src/app/icon.png` |
+| Your photos & video | `public/media/` |
+| Colours & font | `src/app/globals.css`, `src/app/layout.tsx` |
+| Header / footer / sections | `src/components/` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Adding your own images and video
 
-## Learn More
+1. Put files in `public/media/` (e.g. `public/media/fragrances.jpg`).
+2. In `src/lib/content.ts`, set `image: "/media/fragrances.jpg"` on any section, expertise or news item,
+   or `heroImage` on a page. Until an image is set, a soft colour placeholder is shown.
+3. For the homepage film, add `public/media/hero.mp4` and set `heroVideo: "/media/hero.mp4"`.
 
-To learn more about Next.js, take a look at the following resources:
+## Contact form
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The form currently opens the visitor's email app. Connect it to a real backend (API route, Formspree, Resend…) in `src/app/contact/ContactForm.tsx`.
