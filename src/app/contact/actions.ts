@@ -1,7 +1,9 @@
 "use server";
 
+import path from "node:path";
 import nodemailer from "nodemailer";
 import { site } from "@/lib/content";
+import { adminEmailHtml, clientEmailHtml, LOGO_CID } from "./email-templates";
 
 export type ContactState = {
   status: "idle" | "success" | "error";
@@ -67,7 +69,7 @@ export async function sendContact(
   });
 
   const to = process.env.CONTACT_TO || site.email;
-  const from = `"${site.name} Website" <${SMTP_USER}>`;
+  const from = { name: `${site.name} Website`, address: SMTP_USER };
   const safe = {
     name: escapeHtml(name),
     company: escapeHtml(company || "—"),
@@ -76,43 +78,44 @@ export async function sendContact(
     message: escapeHtml(message).replace(/\n/g, "<br>"),
   };
 
+  const siteUrl = process.env.SITE_URL?.replace(/\/$/, "");
+  // Logo embedded inline (cid) so it shows without depending on a public URL.
+  const logo = {
+    filename: "mobifrag-logo.png",
+    path: path.join(process.cwd(), "public", "brand", "logo-light.png"),
+    cid: LOGO_CID,
+    contentDisposition: "inline" as const,
+  };
+
   try {
     // 1) Notify Mobifrag
     await transporter.sendMail({
       from,
       to,
-      replyTo: `"${name}" <${email}>`,
+      replyTo: { name, address: email },
       subject: `[${topic}] New enquiry from ${name}`,
-      text: `New website enquiry\n\nName: ${name}\nCompany: ${company || "—"}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${message}`,
-      html: `
-        <div style="font-family:Arial,sans-serif;font-size:14px;color:#222;line-height:1.6">
-          <h2 style="margin:0 0 16px">New website enquiry</h2>
-          <table cellpadding="6" style="border-collapse:collapse">
-            <tr><td><strong>Name</strong></td><td>${safe.name}</td></tr>
-            <tr><td><strong>Company</strong></td><td>${safe.company}</td></tr>
-            <tr><td><strong>Email</strong></td><td><a href="mailto:${safe.email}">${safe.email}</a></td></tr>
-            <tr><td><strong>Topic</strong></td><td>${safe.topic}</td></tr>
-          </table>
-          <p style="margin-top:16px"><strong>Message</strong></p>
-          <p style="white-space:normal">${safe.message}</p>
-        </div>`,
+      text: `New website enquiry\n\nName: ${name}\nCompany: ${company || "—"}\nEmail: ${email}\nTopic: ${topic}\n\nMessage:\n${message}\n`,
+      html: adminEmailHtml(safe, siteUrl),
+      attachments: [logo],
     });
 
     // 2) Confirmation to the client
     await transporter.sendMail({
-      from: `"${site.name}" <${SMTP_USER}>`,
-      to: email,
+      from: { name: site.name, address: SMTP_USER },
+      to: { name, address: email },
       replyTo: to,
-      subject: `We've received your query — ${site.name}`,
-      text: `Dear ${name},\n\nThank you for contacting ${site.name}. Your query has been submitted successfully and our team will get back to you shortly.\n\nYour message:\n${message}\n\nKind regards,\nThe ${site.name} Team\n${to}`,
-      html: `
-        <div style="font-family:Arial,sans-serif;font-size:14px;color:#222;line-height:1.6">
-          <p>Dear ${safe.name},</p>
-          <p>Thank you for contacting <strong>${site.name}</strong>. Your query has been submitted successfully and our team will get back to you shortly.</p>
-          <p style="margin-top:20px"><strong>Your message (${safe.topic}):</strong></p>
-          <blockquote style="margin:0;padding:12px 16px;border-left:3px solid #999;background:#f6f6f6">${safe.message}</blockquote>
-          <p style="margin-top:20px">Kind regards,<br>The ${site.name} Team<br><a href="mailto:${to}">${to}</a></p>
-        </div>`,
+      subject: `Thank you for contacting ${site.name}, we've received your enquiry`,
+      text:
+        `Dear ${name},\n\n` +
+        `Thank you for contacting ${site.name}. We've received your enquiry and it is now with our ${topic} team. ` +
+        `One of our specialists will get back to you within 1–2 business days.\n\n` +
+        `For your records, here is a copy of your message:\n\n${message}\n\n` +
+        `If you need to add anything, simply reply to this email.\n\n` +
+        `Warm regards,\nThe ${site.name} Team\n${site.tagline}\n${site.address.join(", ")}\n${to}` +
+        (siteUrl ? `\n${siteUrl}` : "") +
+        "\n",
+      html: clientEmailHtml(safe, siteUrl),
+      attachments: [logo],
     });
   } catch (err) {
     console.error("Contact form: failed to send email", err);
