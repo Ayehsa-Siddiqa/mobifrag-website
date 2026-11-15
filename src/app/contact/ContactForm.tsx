@@ -24,7 +24,6 @@ export default function ContactForm() {
       <select name="topic" className={field} defaultValue="Fragrances">
         <option>Fragrances</option>
         <option>Flavours</option>
-        <option>Ingredients</option>
         <option>Careers</option>
         <option>Other</option>
       </select>

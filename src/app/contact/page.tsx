@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/content";
 import ContactForm from "./ContactForm";
 import { MailIcon, PhoneIcon, PinIcon } from "@/components/ContactIcons";
 
-export const metadata: Metadata = { title: "Contact" };
+export const metadata: Metadata = pageMetadata({ title: "Contact Us for Bulk Fragrance & Flavour Oils", description: "Request a quote for bulk fragrance oils or flavour oils by the kilogram. Contact Mobifrag in Lahore, Pakistan and the UAE.", path: "/contact" });
 
 export default function ContactPage() {
   return (

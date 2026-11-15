@@ -10,7 +10,7 @@ export type ContactState = {
   message: string;
 };
 
-const TOPICS = ["Fragrances", "Flavours", "Ingredients", "Careers", "Other"];
+const TOPICS = ["Fragrances", "Flavours", "Careers", "Other"];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function clean(value: FormDataEntryValue | null, max: number) {

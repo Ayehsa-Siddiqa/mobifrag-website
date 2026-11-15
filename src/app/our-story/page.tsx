@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { story } from "@/lib/content";
 import { ContactBand, PageHero } from "@/components/Sections";
 import Reveal from "@/components/Reveal";
 import Visual from "@/components/Visual";
 
-export const metadata: Metadata = { title: "Our story" };
+export const metadata: Metadata = pageMetadata({ title: "Our Story", description: "From a small team in Lahore in 2016 to a trusted bulk supplier of fragrance and flavour oils across Pakistan and the UAE.", path: "/our-story", image: "/media/story-hero.jpg" });
 
 export default function StoryPage() {
   return (

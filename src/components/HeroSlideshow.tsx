@@ -81,7 +81,9 @@ export default function HeroSlideshow({ scenes }: { scenes: HeroScene[] }) {
 
       {/* Scene indicator */}
       {scenes.length > 1 && (
-        <div className="absolute inset-x-0 bottom-6 z-10 mx-auto flex max-w-7xl justify-end gap-3 px-5 md:bottom-10 md:px-10">
+        <div className="absolute inset-x-0 bottom-6 z-10 mx-auto flex max-w-7xl justify-center px-5 md:justify-end md:bottom-10 md:px-10">
+          {/* Equal-width columns, each as wide as the longest label */}
+          <div className="grid grid-flow-col auto-cols-fr gap-3 md:gap-8">
           {scenes.map((s, i) => (
             <button
               key={s.label}
@@ -89,7 +91,7 @@ export default function HeroSlideshow({ scenes }: { scenes: HeroScene[] }) {
               onClick={() => setActive(i)}
               aria-label={`Show ${s.label}`}
               aria-current={i === active}
-              className="group w-16 text-left md:w-28"
+              className="group w-16 text-left md:w-auto md:min-w-28"
             >
               <span className="block h-px w-full overflow-hidden bg-white/30">
                 <span
@@ -98,7 +100,7 @@ export default function HeroSlideshow({ scenes }: { scenes: HeroScene[] }) {
                 />
               </span>
               <span
-                className={`eyebrow mt-3 hidden text-[0.6rem] transition-opacity md:block ${
+                className={`eyebrow mt-3 hidden whitespace-nowrap text-[0.6rem] transition-opacity md:block ${
                   i === active ? "opacity-100" : "opacity-50 group-hover:opacity-80"
                 }`}
               >
@@ -106,6 +108,7 @@ export default function HeroSlideshow({ scenes }: { scenes: HeroScene[] }) {
               </span>
             </button>
           ))}
+          </div>
         </div>
       )}
     </>

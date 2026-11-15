@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
 import type { Tone } from "@/lib/content";
+import LazyVideo from "./LazyVideo";
 
 /** True if a local /public image exists (checked at build time), or the src is remote. */
 function exists(src?: string) {
@@ -19,9 +20,13 @@ const tones: Record<Tone, string> = {
   amber: "from-[#f8ead2] via-[#e7c58f] to-[#a9763a]",
 };
 
-/** Shows an image if `src` is set, otherwise a soft tonal placeholder. Always carries the Mobifrag drop. */
+/**
+ * Shows an image if `src` is set, otherwise a soft tonal placeholder. Always carries the Mobifrag drop.
+ * If `video` is set, it plays over the image (which acts as the poster) once scrolled into view.
+ */
 export default function Visual({
   src,
+  video,
   alt = "",
   tone = "sand",
   className = "",
@@ -29,6 +34,7 @@ export default function Visual({
   preload = false,
 }: {
   src?: string;
+  video?: string;
   alt?: string;
   tone?: Tone;
   className?: string;
@@ -45,6 +51,7 @@ export default function Visual({
           <div className="absolute -bottom-1/4 -left-1/4 h-2/3 w-2/3 rounded-full bg-black/10 blur-3xl" />
         </div>
       )}
+      {video && exists(video) && <LazyVideo src={video} poster={exists(src) ? src : undefined} />}
       <DropMark />
     </div>
   );

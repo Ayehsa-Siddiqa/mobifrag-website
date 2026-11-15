@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { about } from "@/lib/content";
 import { BlockTitle, ContactBand, PageHero } from "@/components/Sections";
 import FullBleed from "@/components/FullBleed";
 import Reveal from "@/components/Reveal";
 import Visual from "@/components/Visual";
 
-export const metadata: Metadata = { title: "About us" };
+export const metadata: Metadata = pageMetadata({ title: "About Mobifrag", description: "Mobifrag is a fragrance and flavour oil supplier with 10 years of expertise, a head office in Lahore and an international centre in the UAE.", path: "/about", image: "/media/about-hero.jpg" });
 
 export default function AboutPage() {
   return (
@@ -68,9 +69,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Quality & certifications */}
+      {/* Quality */}
       <section className="bg-henna-mist">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 md:grid-cols-2 md:gap-20 md:px-10 md:py-28">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 md:grid-cols-2 md:gap-20 md:px-10 md:py-28">
           <Reveal>
             <BlockTitle>{about.quality.title}</BlockTitle>
             <div className="mt-6 space-y-4 text-lg font-light leading-relaxed text-ink/70">
@@ -78,18 +79,9 @@ export default function AboutPage() {
                 <p key={p}>{p}</p>
               ))}
             </div>
-            <Visual src={about.quality.image} tone="sand" className="mt-10 aspect-[4/3] w-full" />
           </Reveal>
           <Reveal delay={150}>
-            <p className="eyebrow text-henna-deep">{about.quality.certificationsLabel}</p>
-            <ul className="mt-6 divide-y divide-ink/10 border-y border-ink/10">
-              {about.quality.certifications.map((c) => (
-                <li key={c.name} className="py-6">
-                  <p className="text-xl font-light">{c.name}</p>
-                  <p className="mt-1 font-light text-ink/60">{c.body}</p>
-                </li>
-              ))}
-            </ul>
+            <Visual src={about.quality.image} tone="sand" className="aspect-[4/3] w-full" />
           </Reveal>
         </div>
       </section>

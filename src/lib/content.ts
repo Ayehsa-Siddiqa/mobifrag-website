@@ -6,19 +6,19 @@ export type Tone = "teal" | "sand" | "ink" | "rose" | "olive" | "amber";
 
 export const site = {
   name: "Mobifrag",
-  tagline: "Fragrances · Flavours · Ingredients",
+  tagline: "Fragrances · Flavours",
   description:
-    "Mobifrag creates fragrances, flavours and natural ingredients for brands around the world.",
+    "Mobifrag supplies fragrance oils and flavour oils in bulk to manufacturers of perfumes, soaps, shampoos, cosmetics and beverages, from Lahore, Pakistan and the UAE.",
   email: "mobifragofficial@gmail.com",
   phone: "+00 000 000 000",
   address: ["Johar Town", "Lahore, Pakistan"],
   // Homepage hero: clips play one after another with a mehandi-green tint.
   // Replace with your own brand film clips in /public/media when you have them.
   heroScenes: [
-    { video: "/media/hero-1.mp4", poster: "/media/hero-1.jpg", label: "Fragrances" },
+    { video: "/media/hero-1.mp4", poster: "/media/hero-1.jpg", label: "Fragrance oils" },
     { video: "/media/hero-2.mp4", poster: "/media/hero-2.jpg", label: "Flavours" },
     { video: "/media/hero-3.mp4", poster: "/media/hero-3.jpg", label: "Nature" },
-    { video: "/media/hero-4.mp4", poster: "/media/hero-4.jpg", label: "Ingredients" },
+    { video: "/media/hero-4.mp4", poster: "/media/hero-4.jpg", label: "Craft" },
   ],
   // Shown if heroScenes is empty
   heroImage: "/media/hero.jpg" as string | null,
@@ -31,7 +31,6 @@ export const site = {
 export const nav = [
   { label: "Fragrances", href: "/fragrances" },
   { label: "Flavours", href: "/flavours" },
-  { label: "Ingredients", href: "/ingredients" },
   { label: "About us", href: "/about" },
   { label: "Our story", href: "/our-story" },
   { label: "CSR", href: "/csr" },
@@ -41,8 +40,8 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ];
 
-export const primaryNav = nav.slice(0, 3);
-export const secondaryNav = nav.slice(3);
+export const primaryNav = nav.slice(0, 2);
+export const secondaryNav = nav.slice(2);
 
 export type Section = {
   eyebrow: string;
@@ -50,6 +49,8 @@ export type Section = {
   body: string;
   tone: Tone;
   image?: string;
+  /** Optional looping video shown over the image (the image is its poster) */
+  video?: string;
   link?: { label: string; href: string };
   /** Optional list shown as tags under the text */
   items?: string[];
@@ -72,14 +73,6 @@ export const expertises: (Section & { href: string })[] = [
     tone: "amber",
     image: "/media/sc-jasmine.jpg",
     href: "/flavours",
-  },
-  {
-    eyebrow: "03",
-    title: "Ingredients",
-    body: "Natural raw materials, sourced with care and refined in-house to keep their character intact.",
-    tone: "olive",
-    image: "/media/ingredients.jpg",
-    href: "/ingredients",
   },
 ];
 
@@ -104,7 +97,8 @@ export const homeSections: Section[] = [
     eyebrow: "Worldwide",
     title: "Close to every market",
     image: "/media/home-worldwide.jpg",
-    body: "Creative and application centres across several regions let us design locally, with an understanding of each culture's favourite scents.",
+    video: "/media/home-worldwide.mp4",
+    body: "From our head office in Lahore and our international centre in the UAE, we supply fragrance and flavour oils to manufacturers across the region, with an understanding of each market's favourite scents.",
     tone: "teal",
     link: { label: "Find a centre", href: "/centres" },
   },
@@ -312,68 +306,6 @@ export const pages: Record<string, PageContent> = {
       link: { label: "Contact our teams", href: "/contact" },
     },
   },
-  ingredients: {
-    eyebrow: "Expertise",
-    title: "Ingredients",
-    intro:
-      "Every great creation starts with a great raw material. From flower fields to our extraction unit, we produce natural ingredients with depth and personality, for perfumers and fragrance makers alike.",
-    tone: "olive",
-    heroImage: "/media/banner-ingredients.jpg",
-    bands: [{ image: "/media/fb-ingr.jpg", eyebrow: "From the field", text: "Harvested at dawn, distilled with patience.", after: 2 }],
-    gallery: {
-      title: "From nature\nto essence",
-      after: 3,
-      items: [
-        { label: "New growth", image: "/media/g-unfurling.jpg" },
-        { label: "Bay laurel", image: "/media/g-bay.jpg" },
-        { label: "Forest floor", image: "/media/g-forest-floor.jpg" },
-        { label: "Green tea", image: "/media/g-green-tea.jpg" },
-        { label: "Deep greens", image: "/media/g-leaves.jpg" },
-        { label: "Calendula", image: "/media/g-calendula.jpg" },
-        { label: "Woodland", image: "/media/g-woodland.jpg" },
-      ],
-    },
-    sections: [
-      {
-        eyebrow: "Sourcing",
-        title: "Natural ingredients,\ncarefully sourced",
-        image: "/media/ingr-sourcing.jpg",
-        body: "We build our supply chains with the same care as our creations. Partners are chosen against strict criteria and supported over the long term, giving you traceable, consistent raw materials.",
-        tone: "olive",
-        itemsLabel: "Our range",
-        items: ["Essential oils", "Absolutes", "Concretes", "Resinoids", "CO₂ extracts", "Natural isolates"],
-      },
-      {
-        eyebrow: "Production",
-        title: "Our own\nextraction unit",
-        image: "/media/vetiver.jpg",
-        body: "Our extraction site turns a wide range of plants, woods, resins and flowers into high-quality ingredients, working with local producers and research partners to keep improving our methods.",
-        tone: "amber",
-      },
-      {
-        eyebrow: "Innovation",
-        title: "Signature\nspecialities",
-        image: "/media/ingr-specialities.jpg",
-        body: "Our research laboratory develops in-house specialities using advanced separation and purification techniques, giving our creators materials no one else has.",
-        tone: "teal",
-      },
-      {
-        eyebrow: "Quality",
-        title: "Certified quality,\nevery batch",
-        image: "/media/ingr-cert.jpg",
-        body: "We follow strict hygiene, safety and environmental standards. Every batch is analysed and documented before it leaves our site.",
-        tone: "sand",
-      },
-    ],
-    closing: {
-      eyebrow: "Regulatory",
-      title: "Regulatory\nsupport",
-      image: "/media/regulatory.jpg",
-      body: "Our regulatory specialists prepare the technical documentation for every ingredient and keep you up to date with changing rules, so your launches are protected.",
-      tone: "sand",
-      link: { label: "Contact our teams", href: "/contact" },
-    },
-  },
   csr: {
     eyebrow: "Commitments",
     title: "Our commitments",
@@ -431,8 +363,8 @@ export const about = {
   title: "Mobifrag Group",
   heroImage: "/media/about-hero.jpg",
   intro:
-    "Mobifrag is an independent creator of fragrances, flavours and natural ingredients. We help brands of every size find a scent that is truly their own.",
-  taglines: ["Fragrances · Flavours · Ingredients", "Crafted with nature, driven by curiosity"],
+    "Mobifrag is an independent creator of fragrance oils and flavours. We help brands of every size find a scent that is truly their own.",
+  taglines: ["Fragrances · Flavours", "Crafted with nature, driven by curiosity"],
   values: [
     { title: "Creativity", body: "Original ideas, crafted by teams who love what they do." },
     { title: "Precision", body: "Rigour in every formula, every batch and every promise." },
@@ -448,9 +380,9 @@ export const about = {
     ],
   },
   stats: [
-    { value: "[XX]", label: "years of expertise" },
-    { value: "[X]", label: "international centres" },
-    { value: "[XXX]", label: "employees" },
+    { value: "10", label: "years of expertise" },
+    { value: "UAE", label: "international centre" },
+    { value: "10", label: "employees" },
   ],
   quality: {
     title: "Our commitment\nto quality",
@@ -458,15 +390,6 @@ export const about = {
     body: [
       "Quality is not a department at Mobifrag, it is how every team works.",
       "Raw materials are checked on arrival, formulas are verified before production, and every batch is tested before release.",
-      "[Describe your quality system and audits here.]",
-    ],
-    certificationsLabel: "Certifications",
-    // ⚠ List only certifications Mobifrag actually holds.
-    certifications: [
-      { name: "[Quality management, e.g. ISO 9001]", body: "[Describe scope]" },
-            { name: "[Halal]", body: "[Certifying body]" },
-      { name: "[Kosher]", body: "[Certifying body]" },
-      { name: "[Organic / COSMOS]", body: "[Describe scope]" },
     ],
   },
 };
@@ -477,14 +400,45 @@ export const story = {
   eyebrow: "Mobifrag",
   title: "Our\njourney",
   heroImage: "/media/story-hero.jpg",
-  intro: "Every milestone has added something to what Mobifrag knows and does today.",
+  intro:
+    "Ten years of fragrance and flavour oils, from a small team in Lahore to a supplier trusted by manufacturers across the region.",
+  // Only the founding year is confirmed; other milestones are labelled by stage until exact years are known.
   timeline: [
-    { year: "[Year]", title: "Foundation", body: "[How and where Mobifrag was founded.]", image: "/media/story-beginning.jpg", tone: "rose" as Tone },
-    { year: "[Year]", title: "First fragrances", body: "[The first fragrance creations and clients.]", image: "/media/story-firstfrag.jpg", tone: "teal" as Tone },
-    { year: "[Year]", title: "Flavours division", body: "[When flavours joined the business.]", image: "/media/story-growth.jpg", tone: "amber" as Tone },
-    { year: "[Year]", title: "Ingredients & extraction", body: "[Opening of ingredient production.]", image: "/media/vetiver.jpg", tone: "olive" as Tone },
-    { year: "[Year]", title: "International growth", body: "[New centres abroad.]", image: "/media/centre-middleeast.jpg", tone: "sand" as Tone },
-    { year: "[Year]", title: "Today", body: "[Where Mobifrag stands now.]", image: "/media/story-today2.jpg", tone: "teal" as Tone },
+    {
+      year: "2016",
+      title: "Founded in Lahore",
+      body: "Mobifrag began in Lahore with a simple focus: high-quality fragrance oils, the raw materials that perfumes and scented products are made from.",
+      image: "/media/story-founding.jpg",
+      tone: "rose" as Tone,
+    },
+    {
+      year: "Bulk",
+      title: "Supplying industry",
+      body: "As demand grew, we moved into bulk supply, delivering fragrance oils by the kilogram to manufacturers of perfumes, soaps, shampoos and cosmetics.",
+      image: "/media/story-bulk.jpg",
+      tone: "teal" as Tone,
+    },
+    {
+      year: "Flavours",
+      title: "Flavours division",
+      body: "We added flavour oils for drinks, sharbat and food products, bringing the same care for quality to everything people taste.",
+      image: "/media/story-growth.jpg",
+      tone: "amber" as Tone,
+    },
+    {
+      year: "UAE",
+      title: "International centre",
+      body: "Our centre in the United Arab Emirates brought us closer to clients across the Gulf and beyond, with faster supply and local support.",
+      image: "/media/centre-middleeast.jpg",
+      tone: "sand" as Tone,
+    },
+    {
+      year: "Today",
+      title: "Ten years on",
+      body: "A dedicated team of ten, two locations and a growing library of fragrance and flavour oils, supplied in bulk to brands that want quality they can rely on.",
+      image: "/media/story-today-lab.jpg",
+      tone: "teal" as Tone,
+    },
   ],
 };
 
@@ -494,11 +448,12 @@ export const centresIntro =
   "Wherever our clients are, a Mobifrag team is close by, ready to create, test and support.";
 
 export const centres: { image?: string; region: string; city: string; role: string; address: string[]; phone?: string; tone: Tone }[] = [
-  { image: "/media/centre-europe.jpg", region: "Europe", city: "Headquarters", role: "Creation, production & R&D", address: ["[Street address]", "[Postcode, City]", "[Country]"], phone: "[+00 000 000 000]", tone: "teal" },
-  { image: "/media/centre-middleeast.jpg", region: "Middle East", city: "Regional office", role: "Creation & customer service", address: ["[Street address]", "[City]", "[Country]"], phone: "[+00 000 000 000]", tone: "amber" },
-  { image: "/media/centre-asia.jpg", region: "Asia", city: "Application centre", role: "Fragrance & flavour application", address: ["[Street address]", "[City]", "[Country]"], tone: "olive" },
-  { image: "/media/centre-americas.jpg", region: "Americas", city: "Sales office", role: "Sales & technical support", address: ["[Street address]", "[City]", "[Country]"], tone: "rose" },
+  { image: "/media/centre-asia.jpg", region: "Pakistan", city: "Head office, Lahore", role: "Fragrance & flavour oils, bulk supply", address: [...site.address], tone: "olive" },
+  { image: "/media/centre-middleeast.jpg", region: "United Arab Emirates", city: "International centre", role: "Regional supply & customer service", address: ["United Arab Emirates"], tone: "amber" },
 ];
+
+/** Hero image for the Centres page */
+export const centresHeroImage = "/media/centres-hero.jpg";
 
 export type NewsItem = {
   slug: string;
@@ -539,7 +494,7 @@ export const news: NewsItem[] = [
   },
   {
     slug: "sustainable-sourcing",
-    category: "Ingredients",
+    category: "Sourcing",
     date: "2026-07-20",
     title: "A new sustainable sourcing partnership",
     image: "/media/news-sourcing.jpg",

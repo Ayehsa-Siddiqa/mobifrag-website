@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { news } from "@/lib/content";
+import { isPlaceholderNews, pageMetadata } from "@/lib/seo";
 import { formatDate } from "@/components/NewsCard";
 import { ArrowLink } from "@/components/Sections";
 import Visual from "@/components/Visual";
@@ -12,7 +13,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const item = news.find((n) => n.slug === slug);
-  return { title: item?.title ?? "News" };
+  if (!item) return { title: "News" };
+  return pageMetadata({
+    title: item.title,
+    description: item.excerpt,
+    path: `/news/${item.slug}`,
+    image: item.image,
+    // Placeholder articles stay out of search results until real copy replaces them.
+    noIndex: isPlaceholderNews(item),
+  });
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {

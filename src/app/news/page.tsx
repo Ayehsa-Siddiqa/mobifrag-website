@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { news } from "@/lib/content";
 import NewsCard from "@/components/NewsCard";
 import Reveal from "@/components/Reveal";
 
-export const metadata: Metadata = { title: "News" };
+export const metadata: Metadata = pageMetadata({ title: "News", description: "The latest news, events and announcements from Mobifrag, supplier of fragrance and flavour oils.", path: "/news" });
 
 export default function NewsPage() {
   return (

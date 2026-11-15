@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Privacy policy" };
+export const metadata: Metadata = pageMetadata({ title: "Privacy Policy", description: "How Mobifrag collects, uses and protects your personal information.", path: "/privacy" });
 
 const updated = "11 November 2026";
 

@@ -53,15 +53,15 @@ export default function Home() {
         <Reveal>
           <Image src="/brand/favicon.png" alt="" width={32} height={32} className="mx-auto h-8 w-8 rounded-md" />
           <p className="mt-10 text-2xl font-light leading-relaxed tracking-tight md:text-4xl">
-            Mobifrag designs fragrances, flavours and natural ingredients for brands that want to be felt, noticed and
+            Mobifrag designs fragrance oils and flavours for brands that want to be felt, noticed and
             remembered.
           </p>
         </Reveal>
       </section>
 
-      {/* Three expertises */}
+      {/* Expertises */}
       <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10 md:pb-28">
-        <div className="grid gap-6 md:grid-cols-3 md:gap-8">
+        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2 md:gap-10">
           {expertises.map((e, i) => (
             <Reveal key={e.href} delay={i * 120}>
               <Link href={e.href} className="group block">
@@ -70,7 +70,7 @@ export default function Home() {
                     src={e.image}
                     alt={e.title}
                     tone={e.tone}
-                    sizes="(min-width: 768px) 33vw, 100vw"
+                    sizes="(min-width: 768px) 50vw, 100vw"
                     className="aspect-[619/800] w-full transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>

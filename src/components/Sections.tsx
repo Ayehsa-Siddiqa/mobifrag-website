@@ -52,7 +52,7 @@ export function ImageText({ section, reverse = false }: { section: Section; reve
     <section className="mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-24">
       <div className={`grid items-center gap-10 md:grid-cols-2 md:gap-20 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}>
         <Reveal>
-          <Visual src={section.image} alt="" tone={section.tone} className="aspect-[4/5] w-full" />
+          <Visual src={section.image} video={section.video} alt="" tone={section.tone} className="aspect-[4/5] w-full" />
         </Reveal>
         <Reveal delay={150} className="max-w-lg">
           <p className="eyebrow text-henna-deep">{section.eyebrow}</p>

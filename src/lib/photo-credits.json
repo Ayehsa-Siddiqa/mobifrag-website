@@ -14,11 +14,11 @@
     "photoUrl": "https://pixabay.com/photos/pretty-woman-wildflowers-summer-882813/"
   },
   "home-worldwide": {
-    "id": "pixabay-2591559",
-    "source": "Pixabay",
-    "author": "TeeFarm",
-    "authorUrl": "https://pixabay.com/users/TeeFarm-199315/",
-    "photoUrl": "https://pixabay.com/photos/spices-curry-market-stall-2591559/"
+    "id": "pexels-video-20395603",
+    "source": "Pexels",
+    "author": "Pexels contributor",
+    "authorUrl": "https://www.pexels.com/",
+    "photoUrl": "https://www.pexels.com/video/a-white-table-with-bottles-of-essential-oils-and-flowers-20395603/"
   },
   "frag-fine": {
     "id": "pixabay-2387210",
@@ -168,11 +168,11 @@
     "photoUrl": "https://pixabay.com/photos/panorama-dubai-skyscraper-coastline-10405062/"
   },
   "centre-asia": {
-    "id": "pixabay-2471492",
+    "id": "pixabay-4793144",
     "source": "Pixabay",
-    "author": "SoleneC1",
-    "authorUrl": "https://pixabay.com/users/SoleneC1-5673897/",
-    "photoUrl": "https://pixabay.com/photos/singapore-marina-bay-gardens-trees-2471492/"
+    "author": "qkcreativity92",
+    "authorUrl": "https://pixabay.com/users/qkcreativity92-11951897/",
+    "photoUrl": "https://pixabay.com/photos/lahore-pakistan-arabesque-4793144/"
   },
   "centre-americas": {
     "id": "pixabay-1853552",
@@ -273,11 +273,11 @@
     "photoUrl": "https://pixabay.com/photos/laboratory-coffee-caffeine-analysis-1338722/"
   },
   "hero-1": {
-    "id": "pixabay-video-257927",
-    "source": "Pixabay",
-    "author": "Mohamed_hassan",
-    "authorUrl": "https://pixabay.com/users/Mohamed_hassan-5229782/",
-    "photoUrl": "https://pixabay.com/videos/id-257927/"
+    "id": "pexels-video-8447510",
+    "source": "Pexels",
+    "author": "Pexels contributor",
+    "authorUrl": "https://www.pexels.com/",
+    "photoUrl": "https://www.pexels.com/video/person-using-a-dropper-on-perfume-8447510/"
   },
   "hero-2": {
     "id": "pixabay-video-102959",
@@ -677,5 +677,33 @@
     "author": "LoggaWiggler",
     "authorUrl": "https://pixabay.com/users/LoggaWiggler-15/",
     "photoUrl": "https://pixabay.com/photos/market-herbs-seasoning-vegetables-196518/"
+  },
+  "centres-hero": {
+    "id": "pixabay-2212978",
+    "source": "Pixabay",
+    "author": "JESHOOTS-com",
+    "authorUrl": "https://pixabay.com/users/JESHOOTS-com-264599/",
+    "photoUrl": "https://pixabay.com/photos/burj-khalifa-emirates-dubai-uae-2212978/"
+  },
+  "story-founding": {
+    "id": "pexels-video-8447340",
+    "source": "Pexels",
+    "author": "Pexels contributor",
+    "authorUrl": "https://www.pexels.com/",
+    "photoUrl": "https://www.pexels.com/video/man-using-a-funnel-to-put-liquid-inside-a-bottle-8447340/"
+  },
+  "story-today-lab": {
+    "id": "pexels-video-8447649",
+    "source": "Pexels",
+    "author": "Pexels contributor",
+    "authorUrl": "https://www.pexels.com/",
+    "photoUrl": "https://www.pexels.com/video/an-elderly-man-sealing-amber-bottles-with-corks-8447649/"
+  },
+  "story-bulk": {
+    "id": "pixabay-video-342185",
+    "source": "Pixabay",
+    "author": "doktorkleinmusic",
+    "authorUrl": "https://pixabay.com/users/doktorkleinmusic/",
+    "photoUrl": "https://pixabay.com/videos/id-342185/"
   }
 }
