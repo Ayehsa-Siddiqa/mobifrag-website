@@ -11,6 +11,10 @@ export const site = {
     "Mobifrag supplies fragrance oils and flavour oils in bulk to manufacturers of perfumes, soaps, shampoos, cosmetics and beverages, from Lahore, Pakistan and the UAE.",
   email: "mobifragofficial@gmail.com",
   phone: "+00 000 000 000",
+  // WhatsApp number for the floating chat button: country code + number, digits only (e.g. "923001234567").
+  // While empty, the button only shows in development, never on the live site.
+  whatsapp: "",
+  whatsappMessage: "Hello Mobifrag, I'd like to enquire about your fragrance / flavour oils.",
   address: ["Johar Town", "Lahore, Pakistan"],
   // Homepage hero: clips play one after another with a mehandi-green tint.
   // Replace with your own brand film clips in /public/media when you have them.
